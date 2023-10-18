@@ -18,11 +18,10 @@ const handleDarkModeChange = () => {
 };
 
 onMounted(async () => {
-    const { index } = route.currentRoute.value.params; // Ambil indeks dari URL
-    countryIndex.value = parseInt(index); // Pastikan itu berupa angka
+    const { index } = route.currentRoute.value.params; 
+    countryIndex.value = parseInt(index); 
 
     try {
-        // Lakukan pemfilteran data jika diperlukan
         const response = await fetch('/src/assets/api/data.json');
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -31,9 +30,7 @@ onMounted(async () => {
         jsonData.value = data;
 
         if (jsonData.value) {
-            // Lakukan validasi apakah indeks ada dalam rentang data JSON
             if (countryIndex.value >= 0 && countryIndex.value < jsonData.value.length) {
-                // Ambil detail negara berdasarkan indeks
                 countryData.value = jsonData.value[countryIndex.value];
             } else {
                 console.error('Invalid country index');
